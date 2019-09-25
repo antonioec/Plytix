@@ -1,0 +1,61 @@
+<div class="container container-fluid">
+  <div class="row">
+    <div class="add-container pull-right">
+      <button type="button" class="btn btn-primary rounded-pill add-btn" (click)="openModal(addModal)">ADD ROW</button>
+    </div>
+  </div>
+
+  <ng-template #addModal>
+    <div class="modal-header">
+      <h5 class="modal-title">Add row</h5>
+      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form [formGroup]="addForm" (submit)="onAdd()">
+        <div class="form-group text-input">
+            <label>Name</label>
+            <input type="text" formControlName="name" class="form-control" />
+        </div>                    
+        <div class="form-group text-input">
+            <label>E-mail</label>
+            <input type="text" formControlName="email" class="form-control" />
+        </div>
+
+        <div class="modal-footer">
+            <div class="form-group">
+                <button type="button" class="btn btn-primary btn-cancel rounded-pill pull-right" aria-label="Close" (click)="modalRef.hide()">
+                  <span aria-hidden="true">CANCEL</span>
+                </button>
+                <button type="submit" class="btn btn-primary rounded-pill pull-right submit-btn" (click)="modalRef.hide()">SAVE</button>
+            </div>
+          </div>
+      </form>
+    </div>
+  </ng-template>
+
+  <div class="content rounded">
+    <table class="table table-bordered table-hover table-responsive-lg">
+      <thead class="thead-dark">
+      <tr class="container-fluid">
+        <th scope="col">NAME</th>
+        <th scope="col">E-MAIL</th>
+        <th scope="col">NUMBER OF POSTS</th>
+        <th scope="col"></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let user of users">
+        <td>{{ user.name }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ loadPostById(user.id) }}</td>
+        <td>
+          <app-edit [user]="user"></app-edit>
+          <app-delete [user]="user"></app-delete>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

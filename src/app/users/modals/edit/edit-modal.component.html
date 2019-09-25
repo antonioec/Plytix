@@ -1,0 +1,26 @@
+<button class="btn btn-icons btn-lg btn-edit" (click)="openModal(editModal)"></button>
+<ng-template #editModal>
+    <div class="modal-header">
+      <h5 class="modal-title">Edit row</h5>
+    </div>
+    <div class="modal-body">
+      <form [formGroup]="editForm" (submit)="onEdit(user.id)">
+        <div class="form-group text-input">
+            <label>Name</label>
+            <input type="text" formControlName="name" class="form-control" value={{user.name}}/>
+        </div>                    
+        <div class="form-group text-input">
+            <label>E-mail</label>
+            <input type="text" formControlName="email" class="form-control" value={{user.email}}/>
+        </div>
+        <div class="modal-footer">
+          <div class="form-group">
+              <button type="button" class="btn btn-primary rounded-pill pull-right cancel-btn" aria-label="Close" (click)="modalRef.hide()">
+                <span aria-hidden="true">CANCEL</span>
+              </button>
+              <button type="submit" class="btn btn-primary rounded-pill pull-right submit-btn" (click)="modalRef.hide()">SAVE</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </ng-template>
